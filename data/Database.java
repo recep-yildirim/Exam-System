@@ -52,7 +52,7 @@ public class Database {
         }
     }
 
-    public void createTables() {
+    private void createTables() {
         try {
             this.createQuestionsTable();
             System.out.println("Tables were created.");
