@@ -89,7 +89,7 @@ public class Question {
                "Description: " + this.description + "\n" +
                "Options:\n" + options +
                "TrueAnswer: " + Character.toString(this.trueAnswer) + "\n" +
-               "Type: " + this.exam + "\n" +
+               "Exam: " + this.exam + "\n" +
                "Lesson: " + this.lesson + "\n";
     }
 }
