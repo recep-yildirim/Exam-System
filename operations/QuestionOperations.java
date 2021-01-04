@@ -90,7 +90,7 @@ public class QuestionOperations {
     }
 
     public void deleteQuestion(int questionID) {
-        String sql = "DELETE FROM questions WHERE " + questionID;
+        String sql = "DELETE FROM questions WHERE QuestionID = " + questionID;
 
         try {
             this.database.statement.executeUpdate(sql);
