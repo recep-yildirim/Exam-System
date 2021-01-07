@@ -6,6 +6,7 @@ import data.Question;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class QuestionOperations {
     private Database database = null;
@@ -98,5 +99,23 @@ public class QuestionOperations {
         } catch (SQLException ex) {
             System.out.println("The question could not deleted.!");
         }
+    }
+
+    public LinkedList<Integer> getIdColumn() {
+        LinkedList<Integer> idColumn = null;
+
+        try {
+            String sql = "SELECT QuestionID FROM questions";
+            ResultSet resultset = this.database.statement.executeQuery(sql);
+            idColumn = new LinkedList<Integer>();
+
+            while(resultset.next()) {
+                idColumn.add(resultset.getInt("QuestionID"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("ID column could not brought.!");
+        }
+
+        return idColumn;
     }
 }
