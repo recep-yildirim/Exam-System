@@ -44,7 +44,7 @@ public class Database {
             this.connection = DriverManager.getConnection(url);
             this.statement = this.connection.createStatement();
 
-            this.createTables();
+            this.createTable();
         } catch (ClassNotFoundException ex) {
             System.out.println("Class not found.!");
         } catch (SQLException ex) {
@@ -52,29 +52,23 @@ public class Database {
         }
     }
 
-    private void createTables() {
+    private void createTable() {
         try {
-            this.createQuestionsTable();
-            System.out.println("Tables were created.");
+            String sql = "CREATE TABLE IF NOT EXISTS questions (" +
+                    "QuestionID int PRIMARY KEY," +
+                    "Description varchar(250) NOT NULL," +
+                    "OptionA varchar(50) NOT NULL," +
+                    "OptionB varchar(50) NOT NULL," +
+                    "OptionC varchar(50) NOT NULL," +
+                    "OptionD varchar(50) NOT NULL," +
+                    "OptionE varchar(50) NOT NULL," +
+                    "TrueAnswer varchar(1) NOT NULL)";
+
+            this.statement.execute(sql);
+            System.out.println("Table was created.");
         } catch (SQLException ex) {
-            System.out.println("Tables could not created.!");
+            System.out.println("Table could not created.!");
         }
-    }
-
-    private void createQuestionsTable() throws SQLException {
-        String questionTableQuery = "CREATE TABLE IF NOT EXISTS questions (" +
-                "QuestionID int PRIMARY KEY," +
-                "Description varchar(250) NOT NULL," +
-                "OptionA varchar(50) NOT NULL," +
-                "OptionB varchar(50) NOT NULL," +
-                "OptionC varchar(50) NOT NULL," +
-                "OptionD varchar(50) NOT NULL," +
-                "OptionE varchar(50) NOT NULL," +
-                "TrueAnswer varchar(1) NOT NULL," +
-                "Exam varchar(15) NOT NULL," +
-                "Lesson varchar(15) NOT NULL)";
-
-        this.statement.execute(questionTableQuery);
     }
 
     public void closeConnection() {
