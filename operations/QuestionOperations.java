@@ -1,3 +1,7 @@
+/**
+ * @author Recep YILDIRIM
+ */
+
 package operations;
 
 import data.Database;

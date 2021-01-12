@@ -1,3 +1,7 @@
+/**
+ * @author Recep YILDIRIM
+ */
+
 package data;
 
 import java.sql.Connection;
