@@ -1,3 +1,7 @@
+/**
+ * @author Recep YILDIRIM
+ */
+
 package data;
 
 import java.util.HashMap;
@@ -8,17 +12,12 @@ public class Question {
     private String description = null;
     private HashMap<Character, String> options = null;
     private char trueAnswer = ' ';
-    private String exam = null;
-    private String lesson = null;
 
-    public Question(int questionID, String description, HashMap<Character, String> options,
-                    char trueAnswer, String exam, String lesson) {
+    public Question(int questionID, String description, HashMap<Character, String> options, char trueAnswer) {
         this.description = description;
         this.options = options;
         this.trueAnswer = trueAnswer;
         this.questionID = questionID;
-        this.exam = exam;
-        this.lesson = lesson;
     }
 
     public void setDescription(String description) {
@@ -31,14 +30,6 @@ public class Question {
 
     public void setTrueAnswer(char trueAnswer) {
         this.trueAnswer = trueAnswer;
-    }
-
-    public void setExam(String exam) {
-        this.exam = exam;
-    }
-
-    public void setLesson(String lesson) {
-        this.lesson = lesson;
     }
 
     public int getQuestionID() {
@@ -55,14 +46,6 @@ public class Question {
 
     public char getTrueAnswer() {
         return this.trueAnswer;
-    }
-
-    public String getExam() {
-        return this.exam;
-    }
-
-    public String getLesson() {
-        return this.lesson;
     }
 
     public void setOptionByName(char option, String content) {
@@ -88,8 +71,6 @@ public class Question {
         return "QuestionID: " + this.questionID + "\n" +
                "Description: " + this.description + "\n" +
                "Options:\n" + options +
-               "TrueAnswer: " + Character.toString(this.trueAnswer) + "\n" +
-               "Exam: " + this.exam + "\n" +
-               "Lesson: " + this.lesson + "\n";
+               "TrueAnswer: " + Character.toString(this.trueAnswer) + "\n";
     }
 }

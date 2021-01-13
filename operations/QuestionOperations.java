@@ -1,3 +1,7 @@
+/**
+ * @author Recep YILDIRIM
+ */
+
 package operations;
 
 import data.Database;
@@ -15,7 +19,7 @@ public class QuestionOperations {
         this.database = database;
     }
 
-    public void addQuestion(Question question) {
+    public boolean addQuestion(Question question) {
         try {
             String sql = "INSERT INTO questions VALUES(" +
                     question.getQuestionID() + "," +
@@ -25,14 +29,12 @@ public class QuestionOperations {
                     "'" + question.getOptionByName('c') + "'" + "," +
                     "'" + question.getOptionByName('d') + "'" + "," +
                     "'" + question.getOptionByName('e') + "'" + "," +
-                    "'" + question.getTrueAnswer() + "'" + "," +
-                    "'" + question.getExam() + "'" + "," +
-                    "'" + question.getLesson() + "'" + ")";
+                    "'" + question.getTrueAnswer() + "'" + ")";
 
             this.database.statement.executeUpdate(sql);
-            System.out.println("The question was added.");
+            return true;
         } catch (SQLException ex) {
-            System.out.println("The question could not added.!");
+            return false;
         }
     }
 
@@ -45,15 +47,11 @@ public class QuestionOperations {
                     questionID,
                     resultset.getString("Description"),
                     this.getOptions(resultset),
-                    resultset.getString("TrueAnswer").charAt(0),
-                    resultset.getString("Exam"),
-                    resultset.getString("Lesson")
+                    resultset.getString("TrueAnswer").charAt(0)
             );
         } catch (SQLException ex) {
-            System.out.println("The question could not brought.!");
+            return null;
         }
-
-        return null;
     }
 
     private HashMap<Character, String> getOptions(ResultSet resultset) {
@@ -68,36 +66,33 @@ public class QuestionOperations {
 
             return options;
         } catch (SQLException ex) {
-            System.out.println("The options could not brought.!");
+            return null;
         }
-
-        return null;
     }
 
-    public void updateQuestion(Question question) {
+    public boolean updateQuestion(Question question) {
         try {
             String sql = "UPDATE questions " + "SET Description = " + "'" + question.getDescription() + "'" + "," +
                     "OptionA = " + "'" + question.getOptionByName('a') + "'" + "," + "OptionB = " + "'" + question.getOptionByName('b') + "'" + "," +
                     "OptionC = " + "'" + question.getOptionByName('c') + "'" + "," + "OptionD = " + "'" + question.getOptionByName('d') + "'" + "," +
-                    "OptionE = " + "'" + question.getOptionByName('e') + "'" + "," + "TrueAnswer = " + "'" + question.getTrueAnswer() + "'" + "," +
-                    "Exam = " + "'" + question.getExam() + "'" + "," + "Lesson = " + "'" + question.getLesson() + "'" +
+                    "OptionE = " + "'" + question.getOptionByName('e') + "'" + "," + "TrueAnswer = " + "'" + question.getTrueAnswer() + "'" +
                     "WHERE QuestionID = " + question.getQuestionID();
 
             this.database.statement.executeUpdate(sql);
-            System.out.println("The question was updated.");
+            return true;
         } catch (SQLException ex) {
-            System.out.println("The question could not updated.!");
+            return false;
         }
     }
 
-    public void deleteQuestion(int questionID) {
+    public boolean deleteQuestion(int questionID) {
         String sql = "DELETE FROM questions WHERE QuestionID = " + questionID;
 
         try {
             this.database.statement.executeUpdate(sql);
-            System.out.println("The question was deleted.");
+            return true;
         } catch (SQLException ex) {
-            System.out.println("The question could not deleted.!");
+            return false;
         }
     }
 
@@ -112,10 +107,10 @@ public class QuestionOperations {
             while(resultset.next()) {
                 idColumn.add(resultset.getInt("QuestionID"));
             }
-        } catch (SQLException ex) {
-            System.out.println("ID column could not brought.!");
-        }
 
-        return idColumn;
+            return idColumn;
+        } catch (SQLException ex) {
+            return idColumn;
+        }
     }
 }
