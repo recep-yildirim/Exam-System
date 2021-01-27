@@ -16,7 +16,7 @@ sorular.java:This exam page.
 egitmen.java :The instructor must enter the user and password correctly.
 ogretmen.java:This page have three choices;add question(soru_ekle.java),remove question(soru_sil.java) and update question(soru_guncelle.java).
 
-3)EXIT(ÇIKIŞ):Logout
+3)Exit(Çıkış):Logout
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 DATABASE FOLDERS:
